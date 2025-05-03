@@ -18,7 +18,7 @@ on:
         type: string
       decrypted_youtube_url:
         description: "Direct URL of the decrypted YouTube IPA"
-        default: ""
+        default: "https://armconverter.com/decryptedappstore/download/544007664/com.google.ios.youtube/19.49.7?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMDc5ODk4LCJpYXQiOjE3NDYyMzUxNDQsImV4cCI6MTc0NjI0NTk0NCwiYXBwaWQiOjU0NDAwNzY2NCwiYXBwdmVyIjoiMTkuNDkuNyJ9.EGrC1l04xU_ABIv0mkud2O9dvyIQvuNciI6ZH_wdfL8"
         required: true
         type: string
       bundle_id:
@@ -73,7 +73,7 @@ jobs:
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
 
       - name: Setup Theos
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
         with:
           repository: theos/theos
           ref: master
@@ -82,7 +82,7 @@ jobs:
       
       - name: SDK Caching
         id: SDK
-        uses: actions/cache@v4.1.2
+        uses: actions/cache@v4
         env:
           cache-name: iOS-${{ inputs.sdk_version }}-SDK
         with:
@@ -102,7 +102,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
 
       - name: Setup Theos Jailed
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
         with:
           repository: qnblackcat/theos-jailed
           ref: master
@@ -157,7 +157,7 @@ jobs:
 
       - name: Upload Artifact
         if: ${{ inputs.upload_artifact }}
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4
         env:
           UYOU_VERSION: ${{ inputs.uyou_version }}
           YOUTUBE_VERSION: ${{ steps.prepare_youtube.outputs.youtube_version }}
