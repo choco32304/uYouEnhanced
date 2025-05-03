@@ -80,12 +80,18 @@ jobs:
           path: theos
           submodules: recursive
 
-      - name: Download PSHeader manually
+      - name: Checkout PreferenceSupport
+        uses: actions/checkout@v4
+        with:
+          repository: Lyvendia/PreferenceSupport
+          path: psheader
+
+      - name: Copy PSHeader files
         run: |
           mkdir -p theos/include/PSHeader
-          curl -L -o theos/include/PSHeader/Misc.h https://raw.githubusercontent.com/opa334/psheader/master/PSHeader/Misc.h
+          cp -r psheader/PSHeader/* theos/include/PSHeader
 
-      
+
       - name: SDK Caching
         id: SDK
         uses: actions/cache@v4
