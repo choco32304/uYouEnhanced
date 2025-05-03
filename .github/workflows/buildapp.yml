@@ -80,11 +80,11 @@ jobs:
           path: theos
           submodules: recursive
 
-      - name: Checkout PSHeader (PreferenceSupport)
-        uses: actions/checkout@v4
-        with:
-          repository: Lyvendia/PreferenceSupport
-          path: psheader
+      - name: Download PSHeader manually
+        run: |
+          mkdir -p theos/include/PSHeader
+          curl -L -o theos/include/PSHeader/Misc.h https://raw.githubusercontent.com/opa334/psheader/master/PSHeader/Misc.h
+
 
       - name: Move PSHeader files
         run: |
