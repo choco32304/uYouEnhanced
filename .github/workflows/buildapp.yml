@@ -80,11 +80,17 @@ jobs:
           path: theos
           submodules: recursive
 
-      - name: Clone PSHeader (PreferenceSupport)
+      - name: Checkout PSHeader (PreferenceSupport)
+        uses: actions/checkout@v4
+        with:
+          repository: Lyvendia/PreferenceSupport
+          path: psheader
+
+      - name: Move PSHeader files
         run: |
-          git clone https://github.com/Lyvendia/PreferenceSupport.git ./psheader
           mkdir -p theos/include/PSHeader
           cp -r ./psheader/PSHeader/* theos/include/PSHeader
+
 
       
       - name: SDK Caching
